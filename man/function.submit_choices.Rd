@@ -7,10 +7,13 @@ Wrapper Function That Performs the Analysis and Generates the Standalone Codes
 This function is a wrapper function that chooses the correct analysis function to perform, saves the results in a zip folder, and generates the code for the standalone analysis.
 }
 \usage{
-function.submit_choices(rv)
+function.submit_choices(Predefined_lists, rv, code_prefix, no_data_choices)
 }
 \arguments{
+\item{Predefined_lists}{A list supplied by 'EQUAL-STATS' application}
 \item{rv}{A list supplied by 'EQUAL-STATS' application based on user input}
+\item{code_prefix}{Code that forms the start of the standalone code}
+\item{no_data_choices}{A list of functions that do not require data upload}
 }
 \value{
 \item{Analysis_results}{Analysis results includes the results of the last called analysis, a plan which includes all previous analysis performed in the session with the data set, and a standard alone R code which allows reproducibility of results.}
@@ -173,5 +176,5 @@ rv$second_menu_choice <- NA
 rv$entry[[1]] <- "Obesity status"
 rv$entry[[2]] <- "Treatment"
 rv$entry[[3]] <- "EQUAL-STATS choice"
-Results <- function.submit_choices(rv)
+Results <- function.submit_choices(Predefined_lists, rv, code_prefix, no_data_choices)
 }

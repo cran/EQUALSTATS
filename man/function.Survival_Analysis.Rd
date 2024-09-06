@@ -7,9 +7,10 @@ Perform Survival Analysis
 Performs analysis of survival data (time-to-event data). It uses the \pkg{survival} to calculate the survival tables and \pkg{survfit} to generate the Kaplan-Meier plot.
 }
 \usage{
-function.Survival_Analysis(rv)
+function.Survival_Analysis(Predefined_lists, rv)
 }
 \arguments{
+\item{Predefined_lists}{A list supplied by 'EQUAL-STATS' application}
 \item{rv}{A list supplied by 'EQUAL-STATS' application based on user input}
 }
 \value{
@@ -191,5 +192,5 @@ rv$entry[[1]] <- "Admission to care home"
 rv$entry[[2]] <- "Follow-up"
 rv$entry[[3]] <- "Treatment"
 # Final function ####
-Results <- function.Survival_Analysis(rv)
+Results <- function.Survival_Analysis(Predefined_lists, rv)
 }

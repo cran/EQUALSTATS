@@ -7,9 +7,10 @@ Calculate the Correlation between Quantitative Variables
 Calculates the correlation between two quantitative variables using \pkg{stats}. It uses \pkg{ggcorrplot} to provide a visual representation of the correlation.
 }
 \usage{
-function.Correlation(rv)
+function.Correlation(Predefined_lists, rv)
 }
 \arguments{
+\item{Predefined_lists}{A list supplied by 'EQUAL-STATS' application}
 \item{rv}{A list supplied by 'EQUAL-STATS' application based on user input}
 }
 \value{
@@ -193,5 +194,5 @@ rv$second_menu_choice <- "EQUAL-STATS choice"
 rv$entry[[1]] <- "Mobility score at 6 months"
 rv$entry[[2]] <- "Mobility score at 12 months"
 # Final function ####
-Results <- function.Correlation(rv)
+Results <- function.Correlation(Predefined_lists, rv)
 }

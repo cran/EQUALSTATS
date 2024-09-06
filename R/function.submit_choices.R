@@ -1,5 +1,5 @@
-function.submit_choices <- function(rv){
-  Analysis_results <- eval(parse(text = paste0("function.", rv$first_menu_choice, "(rv)")))
+function.submit_choices <- function(Predefined_lists, rv, code_prefix, no_data_choices){
+  Analysis_results <- eval(parse(text = paste0("function.", rv$first_menu_choice, "(Predefined_lists, rv)")))
   results_number <- length(rv$analysis_outcome)+1
   rv$analysis_outcome[[results_number]] <- Analysis_results$analysis_outcome
   rv$code[[results_number]] <- Analysis_results$code

@@ -7,9 +7,10 @@ Generate Research Hypothesis
 Generates the research hypothesis that can be used in grant applications, study protocols, and scientific reports when information is provided in plain language.
 }
 \usage{
-function.Generate_Hypothesis(rv)
+function.Generate_Hypothesis(Predefined_lists, rv)
 }
 \arguments{
+\item{Predefined_lists}{A list supplied by 'EQUAL-STATS' application}
 \item{rv}{A list supplied by 'EQUAL-STATS' application based on user input}
 }
 \value{
@@ -114,5 +115,5 @@ rv$entry[[5]] <- "Higher values of the outcome (or more events) are better for t
 rv$entry[[6]] <- 10
 rv$entry[[7]] <- ""
 # Final function ####
-Results <-  function.Generate_Hypothesis(rv)
+Results <-  function.Generate_Hypothesis(Predefined_lists, rv)
 }

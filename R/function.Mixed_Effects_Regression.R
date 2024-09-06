@@ -1,4 +1,4 @@
-function.Mixed_Effects_Regression <- function(rv){
+function.Mixed_Effects_Regression <- function(Predefined_lists, rv){
   # Lists ####
   plan <- {cbind.data.frame(
     analysis_number = paste0("AN", formatC((length(rv$plan) + 1), width = 4, format = "d", flag = 0)),
@@ -59,7 +59,7 @@ function.Mixed_Effects_Regression <- function(rv){
     'rv$entry[[8]] <- ', ifelse(length(rv$entry[[8]]) > 1,
                                 paste0('c("', paste0(rv$entry[[8]], collapse = '", "'), '")'),
                                 paste0('"',rv$entry[[8]],'"')), '\n',
-    'AN', formatC((length(rv$plan) + 1), width = 4, format = "d", flag = 0), '_results <- function.',rv$first_menu_choice,'(rv)', '\n',
+    'AN', formatC((length(rv$plan) + 1), width = 4, format = "d", flag = 0), '_results <- function.',rv$first_menu_choice,'(Predefined_lists, rv)', '\n',
     if(length(rv$plan) == 0){
       'if (TRUE %in% (AN0001_results$plots_list != "")) {invisible(file.rename(AN0001_results$plots_list, paste0(AN0001_results$plots_list,"_copy")))}
 '
@@ -443,8 +443,8 @@ function.Mixed_Effects_Regression <- function(rv){
   # Create a data frame with texts to be inserted
   regression_reference <- list(
     regression_type = c("Linear regression", "Logistic regression", "Multinomial logistic regression", "Ordinal logistic regression", "Poisson regression", "Cox regression"),
-    regression_prefix = c("lmer(", "glmer(", "mblogit(", "clmm(", "glmer(", paste0("coxme(Surv(`", rv$entry[[2]], "`, as.numeric(")),
-    regression_prefix_fixed = c("lm(", "glm(", "multinom(", "clm(", "glm(", paste0("coxph(Surv(`", rv$entry[[2]], "`, as.numeric(")),
+    regression_prefix = c("lme4::lmer(", "lme4::glmer(", "mclogit::mblogit(", "ordinal::clmm(", "lme4::glmer(", paste0("coxme::coxme(Surv(`", rv$entry[[2]], "`, as.numeric(")),
+    regression_prefix_fixed = c("lm(", "glm(", "multinom(", "ordinal::clm(", "glm(", paste0("coxph(Surv(`", rv$entry[[2]], "`, as.numeric(")),
     outcome_end = c(" ~ ", " ~ ", " ~ ", " ~ ", " ~ ", ")) ~ "),
     data_prefix = c("", ", family = binomial", ", trace = FALSE",", Hess = TRUE", ", family = poisson",""),
     convergence = c("@optinfo$conv$opt", "@optinfo$conv$opt", "$converged","$optRes$convergence", "@optinfo$conv$opt",NA),
@@ -588,43 +588,23 @@ function.Mixed_Effects_Regression <- function(rv){
         regression_interim_results <- suppressMessages(suppressWarnings(try(eval(parse(text = regression_interim_text)), silent = TRUE)))
         if ((regression_type == "Linear regression") | (regression_type == "Logistic regression") | (regression_type == "Poisson regression")) {Error <- (suppressWarnings(isS4(regression_interim_results)) == FALSE)} else {Error <- (TRUE %in% suppressWarnings(str_detect(regression_interim_results[[1]][1],"Error")))}
         if (Error == TRUE) {regression_results <- regression_results_1} else {
-          if (regression_type == "Linear regression") {
-            regression_interim_results_2 <- suppressMessages(suppressWarnings(try(eval(parse(text = paste0(
-              'lmerTest::step(regression_interim_results, reduce.random = FALSE, keep = c(', paste0('"`', mandatory_predictors, '`"', collapse = ", "), "))"
-            ))), silent = TRUE)))
-            if (TRUE %in% suppressWarnings(str_detect(regression_interim_results_2[[1]][1],"Error"))) {
-              regression_results <- regression_results_1
-              regression_results_2 <- regression_results_1
-            } else {
-              predictors_to_include <- suppressMessages(suppressWarnings(try(row.names(regression_interim_results_2$fixed[regression_interim_results_2$fixed$Eliminated == 0, ]), silent = TRUE)))
-              regression_text_2 <- paste0(
-                regression_reference$regression_prefix[regression_reference$regression_type == regression_type],
-                "`", outcome, "`", regression_reference$outcome_end[regression_reference$regression_type == regression_type],
-                ifelse(length(predictors_to_include) == 0, random_effects_text, paste0(paste0(predictors_to_include, collapse = ' + '), ' + ', random_effects_text)),
-                regression_reference$data_prefix[regression_reference$regression_type == regression_type],
-                ", data = data)"
-              )[1]
-              regression_results_2 <- suppressMessages(suppressWarnings(try(eval(parse(text = regression_text_2)), silent = TRUE)))
-            }
+          regression_interim_results_2 <- suppressMessages(suppressWarnings(try(eval(parse(text = paste0(
+            'MuMIn::dredge(global.model = regression_interim_results, beta = "none", fixed = c(', paste0('"`', mandatory_predictors, '`"', collapse = ", "), "), trace = 2)"
+          ))), silent = TRUE)))
+          if (TRUE %in% suppressWarnings(str_detect(regression_interim_results_2[[1]][1],"Error"))) {
+            regression_results <- regression_results_1
+            regression_results_2 <- regression_results_1
           } else {
-            regression_interim_results_2 <- suppressMessages(suppressWarnings(try(eval(parse(text = paste0(
-              'dredge(global.model = regression_interim_results, beta = "none", fixed = c(', paste0('"`', mandatory_predictors, '`"', collapse = ", "), "), trace = 2)"
-            ))), silent = TRUE)))
-            if (TRUE %in% suppressWarnings(str_detect(regression_interim_results_2[[1]][1],"Error"))) {
-              regression_results <- regression_results_1
-              regression_results_2 <- regression_results_1
+            # Despite specifying that mandatory predictors should be kept, in some models, the top model shown does not contain mandatory variables
+            check_mandatory_predictors <- regression_interim_results_2
+            colnames(check_mandatory_predictors) <- str_remove_all(colnames(check_mandatory_predictors), "`")
+            check_mandatory_predictors$checks <- if (length(mandatory_predictors) > 1) {
+              rowSums(is.na(check_mandatory_predictors[,mandatory_predictors]))
             } else {
-              # Despite specifying that mandatory predictors should be kept, in some models, the top model shown does not contain mandatory variables
-              check_mandatory_predictors <- regression_interim_results_2
-              colnames(check_mandatory_predictors) <- str_remove_all(colnames(check_mandatory_predictors), "`")
-              check_mandatory_predictors$checks <- if (length(mandatory_predictors) > 1) {
-                rowSums(is.na(check_mandatory_predictors[,mandatory_predictors]))
-              } else {
-                ifelse(is.na(check_mandatory_predictors[,mandatory_predictors]) == FALSE, 0,1)
-              }
-              regression_interim_results_2 <- regression_interim_results_2[check_mandatory_predictors$checks == 0, ]
-              regression_results_2 <- suppressMessages(suppressWarnings(get.models(regression_interim_results_2, subset = 1)[[1]]))
+              ifelse(is.na(check_mandatory_predictors[,mandatory_predictors]) == FALSE, 0,1)
             }
+            regression_interim_results_2 <- regression_interim_results_2[check_mandatory_predictors$checks == 0, ]
+            regression_results_2 <- suppressMessages(suppressWarnings(MuMIn::get.models(regression_interim_results_2, subset = 1)[[1]]))
           }
           if ((regression_type == "Linear regression") | (regression_type == "Logistic regression") | (regression_type == "Poisson regression")) {
             Error <- (suppressWarnings(isS4(regression_results_2)) == FALSE)
@@ -645,7 +625,7 @@ function.Mixed_Effects_Regression <- function(rv){
           } else {
             regression_all_fit_results <- suppressMessages(suppressWarnings(try(allFit(regression_results_2, verbose = FALSE),silent = TRUE)))
             summary_all_fit_results <- suppressMessages(suppressWarnings(try(summary(regression_all_fit_results),silent = TRUE)))
-            if (TRUE %in% suppressWarnings(str_detect(summary_all_fit_results[[1]][1],"Error"))) {
+            if (suppressWarnings(isS4(regression_results_1)) == FALSE) {
               convergence <- func.convergence(regression_results_2)
               if (convergence > 0) {
                 regression_results <- regression_results_1
@@ -687,17 +667,14 @@ function.Mixed_Effects_Regression <- function(rv){
           regression_coefficients[,1:3],
           `Estimate lower conf. int` = regression_coefficients$Estimate - qnorm(0.975) * regression_coefficients$`Std. Error`,
           `Estimate upper conf. int` = regression_coefficients$Estimate + qnorm(0.975) * regression_coefficients$`Std. Error`,
-          `t value` = regression_coefficients[,4],
-          `P value` = regression_coefficients[,5]
+          `t value` = regression_coefficients[,4]
         )
         # Test statistics
         ANOVA_fixed_effects_regression_results <- suppressMessages(anova(regression_results))
-        ANOVA_fixed_effects_regression_results <- ANOVA_fixed_effects_regression_results[, c("F value", "Pr(>F)")]
         test_statistics <- cbind.data.frame(
           Variable = row.names(ANOVA_fixed_effects_regression_results),
           `Statistic` = rep("F value", nrow(ANOVA_fixed_effects_regression_results)),
-          `Statistic value` = ANOVA_fixed_effects_regression_results[,1],
-          `P value` = ANOVA_fixed_effects_regression_results[,2]
+          `Statistic value` = ANOVA_fixed_effects_regression_results[,"F value"]
         )
         actual_versus_predicted <- cbind.data.frame(Actual = data[,1], Predicted = fitted(regression_results))
         concordance_correlation_coefficient <- CCC(actual_versus_predicted[,1], actual_versus_predicted[,2], ci = "z-transform", conf.level = 0.95, na.rm= TRUE)

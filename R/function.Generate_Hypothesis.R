@@ -1,4 +1,4 @@
-function.Generate_Hypothesis <- function(rv){
+function.Generate_Hypothesis <- function(Predefined_lists, rv){
   # Lists
   plan <- {cbind.data.frame(
     analysis_number = paste0("AN", formatC((length(rv$plan) + 1), width = 4, format = "d", flag = 0)),
@@ -41,7 +41,7 @@ function.Generate_Hypothesis <- function(rv){
     'rv$entry[[5]] <- "', rv$entry[[5]], '"\n',
     'rv$entry[[6]] <- ', rv$entry[[6]], '\n',
     'rv$entry[[7]] <- "', rv$entry[[7]], '"\n',
-    'AN', formatC((length(rv$plan) + 1), width = 4, format = "d", flag = 0), '_results <- function.',rv$first_menu_choice,'(rv)', '\n',
+    'AN', formatC((length(rv$plan) + 1), width = 4, format = "d", flag = 0), '_results <- function.',rv$first_menu_choice,'(Predefined_lists, rv)', '\n',
     if(length(rv$plan) == 0){
       'if (TRUE %in% (AN0001_results$plots_list != "")) {invisible(file.rename(AN0001_results$plots_list, paste0(AN0001_results$plots_list,"_copy")))}
 '

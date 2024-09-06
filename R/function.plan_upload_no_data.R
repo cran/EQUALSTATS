@@ -1,4 +1,4 @@
-function.plan_upload_no_data <- function(plan_file_path, rv){
+function.plan_upload_no_data <- function(plan_file_path, Predefined_lists, rv, no_data_choices){
   plan <- read.csv(plan_file_path, check.names = FALSE, na.strings = c(""," ","  ", "NA"))
   # First find whether the column names match
   if (FALSE %in% (colnames(plan) == c("analysis_number", "first_menu_choice", "second_menu_choice", "entry_1", "entry_2", "entry_3", "entry_4", "entry_5", "entry_6", "entry_7", "entry_8", "entry_9", "entry_10", "entry_11", "entry_12", "entry_13", "entry_14", "entry_15", "same_row_different_row"))) {
@@ -38,7 +38,7 @@ function.plan_upload_no_data <- function(plan_file_path, rv){
         plots_list <- list()
         withProgress(message = 'Performing analysis...', value = 0, {
           for (i in 1:nrow(plan)){
-            incProgress(i/nrow(plan), detail = paste0(i, " of ", nrow(plan), " analyses" ))
+            incProgress(1/nrow(plan), detail = paste0(i, " of ", nrow(plan), " analyses" ))
             rv$first_menu_choice <- plan$first_menu_choice[i]
             rv$second_menu_choice <- plan$second_menu_choice[i]
             rv$entry[[1]] <- ifelse(is.na(plan$entry_1[i]), "", plan$entry_1[i])
@@ -57,7 +57,7 @@ function.plan_upload_no_data <- function(plan_file_path, rv){
             rv$entry[[14]] <- ifelse(is.na(plan$entry_14[i]), "", plan$entry_14[i])
             rv$entry[[15]] <- ifelse(is.na(plan$entry_15[i]), "", plan$entry_15[i])
             rv$same_row_different_row <- plan$same_row_different_row[i]
-            Analysis_results <- suppressWarnings(try(eval(parse(text = paste0("function." ,plan$first_menu_choice[i],"(rv)"))), silent = TRUE))
+            Analysis_results <- suppressWarnings(try(eval(parse(text = paste0("function." ,plan$first_menu_choice[i],"(Predefined_lists, rv)"))), silent = TRUE))
             if (suppressWarnings(str_detect(Analysis_results[[1]][1], "Error"))) {
               eval(parse(text = paste0(plan$analysis_number[i], "_results <- list()")))
               eval(parse(text = paste0(plan$analysis_number[i], "_results$plots_list <- ''")))

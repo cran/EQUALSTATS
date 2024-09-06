@@ -7,9 +7,10 @@ Calculate the Diagnostic accuracy using Summary Data
 Uses \pkg{ThresholdROC} and \pkg{pROC} to calculate the diagnostic accuracy of a test using a reference standard. This function is used when  the data is provided as a 2 x 2 contigency table. Use \code{\link[=function.Diagnostic_Accuracy_Primary]{function.Diagnostic_Accuracy_Primary()}} when primary data is available.
 }
 \usage{
-function.Diagnostic_Accuracy_Tables(rv)
+function.Diagnostic_Accuracy_Tables(Predefined_lists, rv)
 }
 \arguments{
+\item{Predefined_lists}{A list supplied by 'EQUAL-STATS' application}
 \item{rv}{A list supplied by 'EQUAL-STATS' application based on user input}
 }
 \value{
@@ -118,5 +119,5 @@ rv$entry[[2]] <- 2
 rv$entry[[3]] <- 1
 rv$entry[[4]] <- 40
 # Final function ####
-Results <- function.Diagnostic_Accuracy_Tables(rv)
+Results <- function.Diagnostic_Accuracy_Tables(Predefined_lists, rv)
 }

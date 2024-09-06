@@ -6,9 +6,10 @@ Perform Regression Analysis
 \description{
 Performs regression analysis without mixed-effects for a single reponse using \pkg{stats} for linear, logistic, and Poisson regression, \pkg{nnet} for mutinomial logistic regression, \pkg{MASS} for ordinal regression, and \pkg{survival} for Cox regression for binary outcomes. It uses \pkg{stats} for performing stepwise regression.}
 \usage{
-function.Regression_Analysis(rv)
+function.Regression_Analysis(Predefined_lists, rv)
 }
 \arguments{
+\item{Predefined_lists}{A list supplied by 'EQUAL-STATS' application}
 \item{rv}{A list supplied by ''EQUAL-STATS' application based on user input}
 }
 \value{
@@ -205,5 +206,5 @@ rv$entry[[5]] <- ""
 rv$entry[[6]] <- ""
 rv$entry[[7]] <- "Yes"
 # Final function ####
-Results <- function.Regression_Analysis(rv)
+Results <- function.Regression_Analysis(Predefined_lists, rv)
 }

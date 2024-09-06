@@ -7,9 +7,10 @@ Compare the Sample Mean with Population Mean
 Uses the appropriate tests from \pkg{stats} to compare the sample mean with the population mean.
 }
 \usage{
-function.Compare_Sample_Pop_Means(rv)
+function.Compare_Sample_Pop_Means(Predefined_lists, rv)
 }
 \arguments{
+\item{Predefined_lists}{A list supplied by 'EQUAL-STATS' application}
 \item{rv}{A list supplied by 'EQUAL-STATS' application based on user input}
 }
 \value{
@@ -188,5 +189,5 @@ rv$second_menu_choice <- "Categorical variable"
 rv$entry[[1]] <- "Obesity status"
 rv$entry[[2]] <- 0.4
 # Final function ####
-Results <- function.Compare_Sample_Pop_Means(rv)
+Results <- function.Compare_Sample_Pop_Means(Predefined_lists, rv)
 }

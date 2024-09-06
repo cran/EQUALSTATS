@@ -6,9 +6,10 @@ Perform Multivariate Regression
 \description{
 Performs multivariate regression analysis using \pkg{lme4} for multivariate linear, logistic, and Poisson regression and \pkg{stats} for performing stepwise regression. The user interface accepts multinomial and ordinal variables, but the results for regression types other than multivariate linear and logistic regressions are unverified.}
 \usage{
-function.Multivariate_Regression(rv)
+function.Multivariate_Regression(Predefined_lists, rv)
 }
 \arguments{
+\item{Predefined_lists}{A list supplied by 'EQUAL-STATS' application}
 \item{rv}{A list supplied by ''EQUAL-STATS' application based on user input}
 }
 \value{
@@ -205,5 +206,5 @@ rv$entry[[5]] <- ""
 rv$entry[[6]] <- ""
 rv$entry[[7]] <- "No"
 # Final function ####
-Results <- function.Multivariate_Regression(rv)
+Results <- function.Multivariate_Regression(Predefined_lists, rv)
 }

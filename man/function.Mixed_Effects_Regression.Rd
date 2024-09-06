@@ -6,9 +6,10 @@ Perform Mixed Effects Regression
 \description{
 Performs mixed effects regression analysis using \pkg{lme4} for mixed-effects linear, logistic, and Poisson regression, \pkg{mclogit} for mixed-effects mutinomial logistic regression, \pkg{ordinal} for mixed-effects ordinal regression, and \pkg{coxme} for mixed-effects Cox regression for binary outcomes. It uses \pkg{lmerTest} and \pkg{MuMIn} for performing stepwise regression. For linear, logistic, and Poisson regression, it chooses the best optimizer using \code{\link[lme4:allFit]{lme4::allFit()}}.}
 \usage{
-function.Mixed_Effects_Regression(rv)
+function.Mixed_Effects_Regression(Predefined_lists, rv)
 }
 \arguments{
+\item{Predefined_lists}{A list supplied by 'EQUAL-STATS' application}
 \item{rv}{A list supplied by 'EQUAL-STATS' application based on user input}
 }
 \value{
@@ -212,5 +213,5 @@ rv$entry[[6]] <- ""
 rv$entry[[7]] <- ""
 rv$entry[[8]] <- "No"
 # Final function ####
-Results <- function.Mixed_Effects_Regression(rv)
+Results <- function.Mixed_Effects_Regression(Predefined_lists, rv)
 }

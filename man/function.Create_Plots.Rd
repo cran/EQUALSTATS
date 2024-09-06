@@ -7,9 +7,10 @@ Create Plots
 Uses \pkg{ggplot2} to create various plots.
 }
 \usage{
-function.Create_Plots(rv)
+function.Create_Plots(Predefined_lists, rv)
 }
 \arguments{
+\item{Predefined_lists}{A list supplied by 'EQUAL-STATS' application}
 \item{rv}{A list supplied by 'EQUAL-STATS' application based on user input}
 }
 \value{
@@ -190,5 +191,5 @@ rv$entry[[2]] <- ""
 rv$entry[[3]] <- ""
 rv$entry[[4]] <- ""
 # Final function ####
-Results <- function.Create_Plots(rv)
+Results <- function.Create_Plots(Predefined_lists, rv)
 }

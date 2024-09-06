@@ -7,9 +7,10 @@ Check the Distribution of Data
 Uses the functions from \pkg{stats} and reports the results of Shapiro-Wilk test for normality along with Kolmogrov Smirnov tests for multiple distribution types. It uses \pkg{ggplot2} to create plots and \pkg{cowplot} to combine multiple plots.
 }
 \usage{
-function.Check_Distribution(rv)
+function.Check_Distribution(Predefined_lists, rv)
 }
 \arguments{
+\item{Predefined_lists}{A list supplied by 'EQUAL-STATS' application}
 \item{rv}{A list supplied by 'EQUAL-STATS' application based on user input}
 }
 \value{
@@ -191,5 +192,5 @@ rv$first_menu_choice <- "Check_Distribution"
 rv$second_menu_choice <- NA
 rv$entry[[1]] <- "Mobility score at 6 months"
 # Final function ####
-Results <- function.Check_Distribution(rv)
+Results <- function.Check_Distribution(Predefined_lists, rv)
 }

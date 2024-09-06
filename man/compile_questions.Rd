@@ -9,7 +9,7 @@ Obtains the questions related to a particular selection and converts them to shi
 compile_questions(Predefined_lists, rv)
 }
 \arguments{
-\item{Predefined_lists}{A list supplied by 'EQUAL-STATS' application based on user input}
+\item{Predefined_lists}{A list supplied by 'EQUAL-STATS' application}
 \item{rv}{A list supplied by 'EQUAL-STATS' application based on user input}
 }
 \value{

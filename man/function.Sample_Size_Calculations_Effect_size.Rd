@@ -7,9 +7,10 @@ Perform Sample Size Calculations using Effect Size Approach
 Performs the power and sample size calculations using \pkg{pwr} to calculate the power and sample size for binary and continuous outcomes. It uses \pkg{ggplot2} to create plots. This functions takes summary information as input. If you want to calculate the sample size based on primary data, use function.Sample_Size_Calculations_Primary.
 }
 \usage{
-function.Sample_Size_Calculations_Effect_size(rv)
+function.Sample_Size_Calculations_Effect_size(Predefined_lists, rv)
 }
 \arguments{
+\item{Predefined_lists}{A list supplied by 'EQUAL-STATS' application}
 \item{rv}{A list supplied by 'EQUAL-STATS' application based on user input}
 }
 \value{
@@ -118,5 +119,5 @@ rv$entry[[2]] <- 0.4
 rv$entry[[3]] <- "Intervention is better or worse than comparator"
 rv$entry[[4]] <- "Independent samples"
 # Final function ####
-Results <-  function.Sample_Size_Calculations_Effect_size(rv)
+Results <-  function.Sample_Size_Calculations_Effect_size(Predefined_lists, rv)
 }

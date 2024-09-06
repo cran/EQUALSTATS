@@ -7,9 +7,10 @@ Calculate Summary Measures
 Calculates the summary (descriptive) measures of data, such as proportions and the confidence intervals for categorical data and mean, standard deviation, confidence intervals, median, quartiles, skewness and kurtosis. It uses \pkg{base} and \pkg{DescTools} to calculate these measures.
 }
 \usage{
-function.Summary_Measures(rv)
+function.Summary_Measures(Predefined_lists, rv)
 }
 \arguments{
+\item{Predefined_lists}{A list supplied by 'EQUAL-STATS' application}
 \item{rv}{A list supplied by 'EQUAL-STATS' application based on user input}
 }
 \value{
@@ -194,5 +195,5 @@ rv$entry[[1]] <- "Obesity status"
 rv$entry[[2]] <- "Treatment"
 rv$entry[[3]] <- "EQUAL-STATS choice"
 # Final function ####
-Results <-  function.Summary_Measures(rv)
+Results <-  function.Summary_Measures(Predefined_lists, rv)
 }

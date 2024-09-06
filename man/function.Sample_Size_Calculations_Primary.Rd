@@ -7,9 +7,10 @@ Perform Sample Size Calculations from Primary Data
 Performs the power and sample size calculations using \pkg{pwr} to calculate the power and sample size for binary and continuous outcomes. It uses \pkg{ggplot2} to create plots. This functions takes primary data as input. If you want to calculate the sample size based on summary information, use function.Sample_Size_Calculations_Effect_size.
 }
 \usage{
-function.Sample_Size_Calculations_Primary(rv)
+function.Sample_Size_Calculations_Primary(Predefined_lists, rv)
 }
 \arguments{
+\item{Predefined_lists}{A list supplied by 'EQUAL-STATS' application}
 \item{rv}{A list supplied by 'EQUAL-STATS' application based on user input}
 }
 \value{
@@ -194,5 +195,5 @@ rv$entry[[1]] <- "Mobility score at 6 months"
 rv$entry[[2]] <- "Treatment"
 rv$entry[[3]] <- 10
 # Final function ####
-Results <- function.Sample_Size_Calculations_Primary(rv)
+Results <- function.Sample_Size_Calculations_Primary(Predefined_lists, rv)
 }

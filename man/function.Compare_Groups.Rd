@@ -7,9 +7,10 @@ Compare Differences Between Groups
 Calculates the skewness and kurtosis and results of Shapiro-Wilk test and Kolmogrov-Smirnov tests using \pkg{DescTools} and \pkg{stats} to determine normality. It uses the the appropriate tests from \pkg{stats} to compare groups.It uses \pkg{ggplot2} to create plots and \pkg{cowplot} to combine multiple plots.
 }
 \usage{
-function.Compare_Groups(rv)
+function.Compare_Groups(Predefined_lists, rv)
 }
 \arguments{
+\item{Predefined_lists}{A list supplied by 'EQUAL-STATS' application}
 \item{rv}{A list supplied by 'EQUAL-STATS' application based on user input}
 }
 \value{
@@ -204,5 +205,5 @@ rv$entry[[1]] <- "Unable to walk independently at 6 weeks"
 rv$entry[[2]] <- "Treatment"
 rv$entry[[3]] <- "0.05"
 # Final function ####
-Results <- function.Compare_Groups(rv)
+Results <- function.Compare_Groups(Predefined_lists, rv)
 }

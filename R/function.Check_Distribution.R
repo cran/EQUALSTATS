@@ -1,4 +1,4 @@
-function.Check_Distribution <- function(rv){
+function.Check_Distribution <- function(Predefined_lists, rv){
   # Lists
   plan <- {cbind.data.frame(
     analysis_number = paste0("AN", formatC((length(rv$plan) + 1), width = 4, format = "d", flag = 0)),
@@ -31,7 +31,7 @@ function.Check_Distribution <- function(rv){
     'rv$entry[[1]] <- ', ifelse(length(rv$entry[[1]]) > 1,
                                 paste0('c("', paste0(rv$entry[[1]], collapse = '", "'), '")'),
                                 paste0('"',rv$entry[[1]],'"')), '\n',
-    'AN', formatC((length(rv$plan) + 1), width = 4, format = "d", flag = 0), '_results <- function.',rv$first_menu_choice,'(rv)', '\n',
+    'AN', formatC((length(rv$plan) + 1), width = 4, format = "d", flag = 0), '_results <- function.',rv$first_menu_choice,'(Predefined_lists, rv)', '\n',
     if(length(rv$plan) == 0){
       'if (TRUE %in% (AN0001_results$plots_list != "")) {invisible(file.rename(AN0001_results$plots_list, paste0(AN0001_results$plots_list,"_copy")))}
 '

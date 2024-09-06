@@ -1,8 +1,8 @@
 globalVariables(c("ACF", "Actual", "Actual.values", "AN0001_results", "Average",
-                  "Categories", "code_prefix", "cooks_distance", "descriptive_summary",
+                  "Categories", "cooks_distance", "descriptive_summary",
                   "fitted_values", "group", "hat_values","Lag",
-                  "no_data_choices", "outcome","Predicted", "Predicted.values",
-                  "Predefined_lists", "rainbow", "raw_residuals", "standardised_residuals",
+                  "outcome","Predicted", "Predicted.values",
+                  "rainbow", "raw_residuals", "standardised_residuals",
                   "subject_id", "Time", "time_of_measurement", "y"),
                 "EQUALSTATS", add = TRUE)
 compile_questions <- function(Predefined_lists, rv) {

@@ -7,9 +7,10 @@ Make Conclusions
 Generates conclusions when summary information, information used for sample size, and the diffences between the groups are provided. The summary information can be generated from function.Summary_Measures and the difference between the groups can be calculated using function.Compare_Groups. It uses the \pkg{pwr} to calculate the sample size.
 }
 \usage{
-function.Make_Conclusions_Effect_size(rv)
+function.Make_Conclusions_Effect_size(Predefined_lists, rv)
 }
 \arguments{
+\item{Predefined_lists}{A list supplied by 'EQUAL-STATS' application}
 \item{rv}{A list supplied by 'EQUAL-STATS' application based on user input}
 }
 \value{
@@ -126,5 +127,5 @@ rv$entry[[10]] <- 0.05
 rv$entry[[11]] <- "0.05"
 rv$entry[[12]] <- "0.80"
 # Final function ####
-Results <- function.Make_Conclusions_Effect_size(rv)
+Results <- function.Make_Conclusions_Effect_size(Predefined_lists, rv)
 }
