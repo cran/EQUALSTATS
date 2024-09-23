@@ -36,7 +36,7 @@ function.Sample_Size_Calculations_Primary <- function(Predefined_lists, rv){
     'rv$entry[[2]] <- ', ifelse(length(rv$entry[[2]]) > 1,
                                 paste0('c("', paste0(rv$entry[[2]], collapse = '", "'), '")'),
                                 paste0('"',rv$entry[[2]],'"')), '\n',
-    'rv$entry[[3]] <- ', rv$entry[[3]], '\n',
+    'rv$entry[[3]] <- ', ifelse(rv$entry[[3]] == "", '""', rv$entry[[3]]), '\n',
     'AN', formatC((length(rv$plan) + 1), width = 4, format = "d", flag = 0), '_results <- function.',rv$first_menu_choice,'(Predefined_lists, rv)', '\n',
     if(length(rv$plan) == 0){
       'if (TRUE %in% (AN0001_results$plots_list != "")) {invisible(file.rename(AN0001_results$plots_list, paste0(AN0001_results$plots_list,"_copy")))}
@@ -83,8 +83,8 @@ function.Sample_Size_Calculations_Primary <- function(Predefined_lists, rv){
         effect_size <- cbind.data.frame(test_results$estimate[2] - test_results$estimate[1],sd(data[,1]),(test_results$estimate[2] - test_results$estimate[1])/sd(data[,1]))
         colnames(effect_size) <- c("mean_difference","sd", "effect_size")
         # Sample size calculations
-        desired_effect_size <- ifelse(rv$entry[[3]] == "", effect_size$effect_size, rv$entry[[3]]/sd(data[,1]))
-        desired_mean_difference <- ifelse(rv$entry[[3]] == "", effect_size$mean_difference, rv$entry[[3]])
+        desired_effect_size <- ifelse(rv$entry[[3]] == "", effect_size$effect_size, as.numeric(rv$entry[[3]])/sd(data[,1]))
+        desired_mean_difference <- ifelse(rv$entry[[3]] == "", effect_size$mean_difference, as.numeric(rv$entry[[3]]))
         sample_size_calculations <- suppressWarnings(try(lapply(1:nrow(alpha_power), function(z) {
           cbind.data.frame(
             `Desired mean difference` = desired_mean_difference,
@@ -136,8 +136,8 @@ function.Sample_Size_Calculations_Primary <- function(Predefined_lists, rv){
         effect_size$effect_size <- effect_size$Difference/effect_size$sd
         # Sample size calculations
         if (rv$entry[[3]] != "") {
-          desired_effect_size <-rv$entry[[3]]/sd(data[,1])
-          desired_mean_difference <- rv$entry[[3]]
+          desired_effect_size <- as.numeric(rv$entry[[3]])/sd(data[,1])
+          desired_mean_difference <- as.numeric(rv$entry[[3]])
         } else {
           desired_effect_size <- effect_size$effect_size
           desired_mean_difference <- effect_size$Difference
@@ -217,8 +217,8 @@ function.Sample_Size_Calculations_Primary <- function(Predefined_lists, rv){
       # Sample size calculations
       if (rv$entry[[3]] != "") {
         pooled_sd <- ((table(data[,1])[2]/nrow(data))*(table(data[,1])[1]/nrow(data)))^0.5
-        desired_effect_size <- rv$entry[[3]]/pooled_sd
-        desired_difference_in_proportion <- rv$entry[[3]]
+        desired_effect_size <- as.numeric(rv$entry[[3]])/pooled_sd
+        desired_difference_in_proportion <- as.numeric(rv$entry[[3]])
       } else {
         desired_effect_size <- effect_size$effect_size
         desired_difference_in_proportion <- effect_size$`Difference in proportion`

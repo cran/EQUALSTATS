@@ -54,7 +54,7 @@ function.Diagnostic_Accuracy_Tables <- function(Predefined_lists, rv){
     )
     # Do the analysis only if at least two rows are present
     if (nrow(data) >= 2) {
-      DTAR_table <- structure(c(rv$entry[[1]],rv$entry[[3]],rv$entry[[2]],rv$entry[[4]]), dim=c(2,2)) # Need to pass on TP, FP, FN, TN but collecting TP, FN, FP, TN
+      DTAR_table <- structure(c(rv$entry[[1]],rv$entry[[2]],rv$entry[[3]],rv$entry[[4]]), dim=c(2,2))
       test_results <- data.frame(diagnostic(DTAR_table,"exact"))
       test_results <- cbind.data.frame(rownames(test_results),test_results)
       colnames(test_results) <- c("Measure", "Point estimate", "Lower CI", "Upper CI")

@@ -1,8 +1,8 @@
 Package: EQUALSTATS
 Title: Algorithm Driven Statistical Analysis for Researchers without
         Coding Skills
-Version: 0.4.0
-Date: 2024-09-05
+Version: 0.5.0
+Date: 2024-09-11
 Authors@R: person("Kurinchi", "Gurusamy", role = c("aut", "cre"), email = "k.gurusamy@ucl.ac.uk")
 Author: Kurinchi Gurusamy [aut, cre]
 Maintainer: Kurinchi Gurusamy <k.gurusamy@ucl.ac.uk>
@@ -14,11 +14,11 @@ Description: Support functions for R-based 'EQUAL-STATS' software which automati
 License: GPL (>= 3)
 Encoding: UTF-8
 URL: https://sites.google.com/view/equal-group/home
-Note: This update fixes bugs noted because of global variables not
-        being recognised as global variables in some environments and
-        some errors noted on specific choices in mixed effects
-        regression.
+Note: This update fixes bugs in function.Create_Plots,
+        function.Diagnostic_Accuracy_Tables, and
+        function.Sample_Size_Calculations_Primary, when typos and
+        non-entries caused errors in results.
 NeedsCompilation: no
-Packaged: 2024-09-06 15:17:36 UTC; kurin
+Packaged: 2024-09-23 08:04:33 UTC; kurin
 Repository: CRAN
-Date/Publication: 2024-09-06 16:10:15 UTC
+Date/Publication: 2024-09-23 08:30:02 UTC

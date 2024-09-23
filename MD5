@@ -1,4 +1,4 @@
-5492347e4fa75a2ca53eaf36523d64df *DESCRIPTION
+f4f54a1991947e25a973389bf48ed271 *DESCRIPTION
 ec7799f0f40608339ac3ed6381c5bc1b *NAMESPACE
 dc1b2f13269e20bf92d7d30c7b7db7dc *R/compile_questions.R
 5b738ab0a6e7809149ccc832b465895e *R/convert_to_user_interface.R
@@ -6,16 +6,16 @@ dc1b2f13269e20bf92d7d30c7b7db7dc *R/compile_questions.R
 f8704e7f79e9b79b5ee9d92535ed6a84 *R/function.Compare_Groups.R
 8d588680fd41fb49f95f38809b15f4ed *R/function.Compare_Sample_Pop_Means.R
 f82c6a1a0b093af297f49a2dc713f763 *R/function.Correlation.R
-192eacf61e949b748526381f3d69b953 *R/function.Create_Plots.R
+431d80f210baf7d62b9ddaf417052951 *R/function.Create_Plots.R
 8bf05a6925336226b71ff3182df03045 *R/function.Diagnostic_Accuracy_Primary.R
-cd8bf636deda50456ed084048902fd1e *R/function.Diagnostic_Accuracy_Tables.R
+91502f4eb05c985ac3f15d795c5e7bed *R/function.Diagnostic_Accuracy_Tables.R
 b39dfcda6713fd3a3fbf3ae4585dba23 *R/function.Generate_Hypothesis.R
 41decc1625f31ecc2a73c66cc0047249 *R/function.Make_Conclusions_Effect_size.R
 ba80cf4790d1caf6d72beaf0ee9db8cf *R/function.Mixed_Effects_Regression.R
 15e353061de5b6b058ff908fcdb282dc *R/function.Multivariate_Regression.R
 63947c08d194c7fafab6fe4fec7497ca *R/function.Regression_Analysis.R
 a90956543430afb113f2e28c9a7c3a99 *R/function.Sample_Size_Calculations_Effect_size.R
-4db1ada2b7ace2a969ff888bea112a99 *R/function.Sample_Size_Calculations_Primary.R
+005cc6b778457eca454b6e2b83bceaca *R/function.Sample_Size_Calculations_Primary.R
 5ac971fdb5de085a5b65edd981fd710a *R/function.Summary_Measures.R
 23d137a71935bc4755c03760b58c776d *R/function.Survival_Analysis.R
 ad6c2c0f294fc6f4236f8f15ebe62b39 *R/function.plan_upload.R
