@@ -1,4 +1,4 @@
-f4f54a1991947e25a973389bf48ed271 *DESCRIPTION
+d04b87bd00d3d7d5b208c149ef2f5471 *DESCRIPTION
 ec7799f0f40608339ac3ed6381c5bc1b *NAMESPACE
 dc1b2f13269e20bf92d7d30c7b7db7dc *R/compile_questions.R
 5b738ab0a6e7809149ccc832b465895e *R/convert_to_user_interface.R
@@ -17,7 +17,7 @@ ba80cf4790d1caf6d72beaf0ee9db8cf *R/function.Mixed_Effects_Regression.R
 a90956543430afb113f2e28c9a7c3a99 *R/function.Sample_Size_Calculations_Effect_size.R
 005cc6b778457eca454b6e2b83bceaca *R/function.Sample_Size_Calculations_Primary.R
 5ac971fdb5de085a5b65edd981fd710a *R/function.Summary_Measures.R
-23d137a71935bc4755c03760b58c776d *R/function.Survival_Analysis.R
+8d198926b582ae5ac0ad4774be68bcc6 *R/function.Survival_Analysis.R
 ad6c2c0f294fc6f4236f8f15ebe62b39 *R/function.plan_upload.R
 28b5618a15cdc7c6755d6aabc57a6b3a *R/function.plan_upload_no_data.R
 e3d4d02b9fd7f5f9e330c5611af7889d *R/function.rbind_different_column_numbers.R
